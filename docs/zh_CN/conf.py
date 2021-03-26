@@ -38,7 +38,6 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
     'sphinx.ext.intersphinx',
-    'nbsphinx',
     'sphinx.ext.extlinks',
     'sphinx_markdown_tables',
 ]
