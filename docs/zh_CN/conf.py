@@ -40,6 +40,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.extlinks',
     'sphinx_markdown_tables',
+    'myst-parser',
 ]
 
 # 添加示例模块
