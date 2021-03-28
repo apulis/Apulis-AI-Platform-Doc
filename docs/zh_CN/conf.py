@@ -32,7 +32,6 @@ release = 'v0.5.0'
 # ones.
 #     'sphinxarg.ext',
 extensions = [
-    'recommonmark',
     'sphinx.ext.autodoc',
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
@@ -42,6 +41,18 @@ extensions = [
     'sphinx_markdown_tables',
     'myst_parser',
 ]
+
+# extensions = [
+#     'recommonmark',
+#     'sphinx.ext.autodoc',
+#     'sphinx.ext.mathjax',
+#     'sphinx.ext.napoleon',
+#     'sphinx.ext.viewcode',
+#     'sphinx.ext.intersphinx',
+#     'sphinx.ext.extlinks',
+#     'sphinx_markdown_tables',
+#     'myst_parser',
+# ]
 
 # 添加示例模块
 # autodoc_mock_imports = ['apex', 'nni_node']
