@@ -22,7 +22,7 @@ copyright = '2021, thomas'
 author = 'thomas'
 
 # The full version, including alpha/beta/rc tags
-release = 'latest'
+release = 'stable'
 
 
 # -- General configuration ---------------------------------------------------
