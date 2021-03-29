@@ -22,7 +22,7 @@ copyright = '2021, thomas'
 author = 'thomas'
 
 # The full version, including alpha/beta/rc tags
-release = 'v0.5.0'
+release = 'latest'
 
 
 # -- General configuration ---------------------------------------------------
@@ -91,5 +91,4 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['../_static']
 html_logo = '../img/diamond.png'
-html_title = '支持神经网络结构搜索、模型压缩、超参调优的开源自动机器学习工具 (%s %s)' % \
-(project, release)
+html_title = '依瞳人工智能平台文库 (%s %s)' % (project, release)
