@@ -458,7 +458,7 @@ required_firmware_firmware_version=1.0
 
 ---
 
-## FAQ：
+## FAQ
 
 1. 包安装时提示软件已经安装，或安装Fail
 
