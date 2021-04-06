@@ -1,17 +1,17 @@
-# 1. altals服务器初始化安装指导
+# altals服务器初始化安装指导
 
-## 1.1. 安装主机操作系统
+## 安装主机操作系统
 
-### 1.1.1. 通过ibmc安装ubuntu步骤
+### 通过ibmc安装ubuntu步骤
 
-### 1.1.2. ibmc登录WEB页面
+### ibmc登录WEB页面
 
 ```bash
 https://xxx.xxx.xxx.xxx
 # 输入账号和密码
 ```
 
-### 1.1.3. 在虚拟终端挂载iso镜像，并启动安装
+### 在虚拟终端挂载iso镜像，并启动安装
 
 1. 打开首页右侧的虚拟终端，推荐选择html5共享窗口
    选择CD的`image`挂载镜像文件，千万不要选择`file`
@@ -26,7 +26,7 @@ https://xxx.xxx.xxx.xxx
 
 *参考：* [官方说明](https://support.huawei.com/enterprise/en/doc/EDOC1100048786/916c5c0a/mounting-a-file-to-the-virtual-cd-rom-drive-vmm--d-connect)
 
-## 1.2. 系统要求及环境检查
+## 系统要求及环境检查
 
 - 系统版本
   [ubuntu 18.04.1](http://cdimage.ubuntu.com/ubuntu/releases/18.04/release/)
@@ -41,7 +41,7 @@ https://xxx.xxx.xxx.xxx
   - gcc:7.3.0
   - python:3.7.5
 
-### 1.2.1. apt配置源
+### apt配置源
 
 apt推荐安装源：https://mirrors.huaweicloud.com/
 
@@ -68,7 +68,7 @@ sudo sed -i "s@http://.*security.ubuntu.com@http://repo.huaweicloud.com@g" /etc/
 apt-get update
 ```
 
-### 1.2.2. 升级内核
+### 升级内核
 
 1. 查看已经安装的内核
 
@@ -131,7 +131,7 @@ dpkg-query -s linux-headers-$(uname -r)
 apt install -y linux-headers-4.15.0-99-generic
 ```
 
-### 1.2.3. cmake3.5.2编译安装
+### cmake3.5.2编译安装
 
 **一般情况系统已安装 cmake3.5.2 以上版本，可不更新**
 
@@ -142,7 +142,7 @@ wget https://cmake.org/files/v3.5/cmake-3.5.2.tar.gz --no-check-certificate
 tar -zxvf cmake-3.5.2.tar.gz && cd cmake-3.5.2 && ./bootstrap --prefix=/usr && make && make install && cmake --version
 ```
 
-### 1.2.4. gcc/g++7.3.0编译安装
+### gcc/g++7.3.0编译安装
 
 **一般情况系统已安装gcc 7.5.0 以上版本，可不更新**
 
@@ -164,15 +164,15 @@ wget http://gcc.gnu.org/pub/gcc/infrastructure/isl-0.16.1.tar.bz2
 make -j120 # 通过grep -w processor /proc/cpuinfo|wc -l查看cpu数，示例为15，用户可自行设置相应参数。
 ```
 
-### 1.2.5. python安装
+### python安装
 
-#### 1.2.5.1. 依赖安装
+#### 依赖安装
 
 ```bash
 apt install -y gcc make cmake zlib1g zlib1g-dev libbz2-dev openssl libsqlite3-dev libssl-dev libxslt1-dev libffi-dev unzip pciutils net-tools libblas-dev gfortran libblas3 libopenblas-dev
 ```
 
-#### 1.2.5.2. python编译安装
+#### python编译安装
 
 ```bash
 # 可换成拷贝本地的备份文件
@@ -199,14 +199,14 @@ ln -s /usr/local/python3.6.9/bin/python3 /usr/bin/python3 && ln -s /usr/local/py
 python3 --version && pip3 --version
 ```
 
-#### 1.2.5.3. （国内）pip源配置和依赖包安装
+#### （国内）pip源配置和依赖包安装
 
 ```bash
 pip3.7 config set global.index-url https://mirrors.aliyun.com/pypi/simple
 pip3.7 install numpy decorator sympy==1.0  pyyaml  pathlib2 grpcio grpcio-tools  protobuf scipy requests
 ```
 
-## 1.3. 创建安装和运行用户
+## 创建安装和运行用户
 
 ```bash
 # 创建指定用户，用户组id: 1680用户目录为 /home/HwHiAiUser
@@ -217,15 +217,15 @@ userdel -r -f HwHiAiUser
 uid=1680(HwHiAiUser) gid=1680(HwHiAiUser) groups=1680(HwHiAiUser)
 ```
 
-## 1.4. 系统环境检查
+## 系统环境检查
 
 ```bash
 uname -mr && cat /etc/*release
 ```
 
-## 1.5. 安装NPU驱动、固件和工具包
+## 安装NPU驱动、固件和工具包
 
-### 1.5.1. 获取安装包
+### 获取安装包
 
 1. `cd /home/HwHiAiUser && mkdir -p ascend_date && cd ascend_date`
 2. 下载所有的安装包[华为开发者社区](https://developer.huaweicloud.com/tool.html),[合作方分享](https://e-share.obs-website.cn-north-1.myhuaweicloud.com/?)
@@ -242,7 +242,7 @@ uname -mr && cat /etc/*release
    ```
 3. 使用root用户登录到运行环境，将  *.run软件包上传至到运行环境任意路径下，如/root下; 非root用户一般在$HOME下
 
-### 1.5.2. 非Root安装工具包
+### 非Root安装工具包
 
 1. 创建HwHiAiUser为指定的uid，如下：
 
@@ -308,11 +308,11 @@ required_firmware_firmware_version=1.0
 **须注意npu-smi工具使用 /lib64，需要配置**
 `ln -s /lib /lib64`
 
-### 1.5.3. 驱动卸载
+### 驱动卸载
 
 按照驱动安装的顺序，用执行安装程序的用户，后安装的先卸载。卸载完成可以检查`/usr/local/Ascend/`，`/home/HwHiAiUser/Ascend/`目录对应目录是否卸载。
 
-### 1.5.4. 检查安装状态
+### 检查安装状态
 
 * 配置NPU设备IP，以单机atlas01为例
 
@@ -418,7 +418,7 @@ required_firmware_firmware_version=1.0
     192.168.40.0    *               255.255.255.0   U     0      0        0 eth3
     ```
 
-### 1.5.5. 升级固件工具包
+### 升级固件工具包
 
 - 若用户安装软件包时指定路径，执行`<package-path>/  *.run --upgrade --install-path=<path>`命令完成升级。
 
@@ -434,9 +434,31 @@ required_firmware_firmware_version=1.0
 
 `/home/package/  *.run --upgrade`
 
+## 安装网卡驱动(可选)
+
+- 获取安装包
+
+  1. 登录华为企业业务网站。
+  2. 在导航栏中选择“技术支持 > 智能管理软件 > iDriver > TaiShanServer iDriver”，进入目标服务器的详细页面的软件标签下，根据要求下载对应的版本。
+
+  [《华为TM210灵活IO卡用户指南01.PDF》](../../images/config_images/华为TM210灵活IO卡用户指南03.pdf)
+- 执行安装
+
+  1. 进入下载目录
+     `cd /root/driver`
+  2. 进行驱动安装
+
+     `dpkg -i NIC-hisi_eth-Ubuntu18.04.1-hns3-1.0.2-aarch64.deb`
+  3. 查看驱动是否升级到驱动配套表中的指定版本
+
+     `modinfo hns3`
+- 升级驱动
+
+  --runTM210暂不支持固件升级。  --run
+
 ---
 
-* FAQ：
+## FAQ：
 
 1. 包安装时提示软件已经安装，或安装Fail
 
@@ -483,29 +505,7 @@ apt install  -y python3.6
 * CANN 驱动安装过程使用 DKMS 检查内核版本是否是指定的（例如： 4.15-0.99），如果没有安装dkms 可能会误报内核不一致的ERROR，
 * 使用`lsb_release -a `检查系统版本是否是指定的（例如：Ubuntu Server 18.04.1 arm/amd64）, lsb_release 依赖系统python3.6的环境，如果在一键化安装过程中损坏了系统python环境，需要重新卸载重新安装python3.6
 
-## 1.6. 安装网卡驱动(可选)
-
-- 获取安装包
-
-  1. 登录华为企业业务网站。
-  2. 在导航栏中选择“技术支持 > 智能管理软件 > iDriver > TaiShanServer iDriver”，进入目标服务器的详细页面的软件标签下，根据要求下载对应的版本。
-
-  [《华为TM210灵活IO卡用户指南01.PDF》](../../images/config_images/华为TM210灵活IO卡用户指南03.pdf)
-- 执行安装
-
-  1. 进入下载目录
-     `cd /root/driver`
-  2. 进行驱动安装
-
-     `dpkg -i NIC-hisi_eth-Ubuntu18.04.1-hns3-1.0.2-aarch64.deb`
-  3. 查看驱动是否升级到驱动配套表中的指定版本
-
-     `modinfo hns3`
-- 升级驱动
-
-  --runTM210暂不支持固件升级。  --run
-
-## 1.7. 参考文档
+## 参考文档
 
 > 《Ascend 910 驱动和开发环境安装指南.chm》
 > 《Atlas Data Center Solution V100R020C00 快速部署指南（A800-9000）01.pdf》

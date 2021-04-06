@@ -1,3 +1,5 @@
+# atlas裸机调试mindspore
+
 ms:1.0.1-basement-arm64
 tf:1.15.0-basement-arm64
 
@@ -42,7 +44,7 @@ cd /data/resnet50_050/scripts/ && mkdir -p /var/log/npu/conf/slog/ && mkdir -p /
 
 219.133.167.42:5000
 
--------------------------------------------------------------------------------------------------------------------
+---
 
 docker build -f ./Dockerfile-ubuntu1804-basement . -t ubuntu:18.04-basement
 docker build -f ./Dockerfile-tfuser-arm64 . -t tf:1.15.0-basement-arm64

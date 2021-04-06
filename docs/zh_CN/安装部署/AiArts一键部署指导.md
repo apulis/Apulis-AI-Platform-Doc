@@ -1,6 +1,6 @@
 # aiarts无网一键部署文档(不含ceph部署)
 
-### 1. 配置说明 & 示例
+## 1. 配置说明 & 示例
 
 | 主机名   | 配置  | 计算设备 | 操作系统       | 子网IP      | 描述           |
 | -------- | ----- | -------- | -------------- | ----------- | -------------- |
@@ -17,9 +17,9 @@
    - 若设备为NVIDIA GPU，则驱动版本不低于430
    - 若设备为Huawei NPU, 则驱动版本不低于 1.72.T2.100.B020
 
-### 2. 安装准备
+## 2. 安装准备
 
-#### 2.1 安装要求
+### 2.1 安装要求
 
 - **建议**
 
@@ -63,14 +63,14 @@
 
 - **步骤说明**：执行时如提示无权限，则使用sudo权限执行
 
-#### 2.2 配置节点Hostname
+### 2.2 配置节点Hostname
 
  将各个节点的主机名， 配置方法（依master01为例子）：
 
 - 编辑/etc/hostname，更新内容为master01
 - 设置hostname立即生效：sudo hostnamectl set-hostname master01
 
-#### 2.3 编辑节点/etc/hosts
+### 2.3 编辑节点/etc/hosts
 
 需要为**部署的mater节点**配置短域名解析。（其他节点不需要，脚本会自动copy）
 
@@ -101,7 +101,7 @@ vim /etc/hosts
 172.16.1.35    worker02.sigsus.cn
 ```
 
-#### 2.4 在主master中创建两个空目录用于存放NFS和docker harbor数据
+### 2.4 在主master中创建两个空目录用于存放NFS和docker harbor数据
 
 - 这两个目录需要创建在有200G以上的磁盘下，若**空间不足**会导致集群**无法安装**。
 - 也可将这两个目录创建在不同的磁盘下，安装部署测试时推荐存放docker harbor目录有150G以上
@@ -114,7 +114,7 @@ cd /home
 mkdir nfs harbor
 ```
 
-#### 2.5 编辑节点/etc/hosts
+### 2.5 编辑节点/etc/hosts
 
 编辑安装盘中config目录下的install_config.json
 
@@ -177,7 +177,7 @@ vim {安装盘目录}/config/install_config.json
 - 如果没有其他master节点，则 "extra_master_nodes" 需要为**空数组**，即 "extra_master_nodes": [] 。
 - 除 "worker_nodes" 和 "extra_master_nodes"外，其他配置项都是**必填项**。
 
-#### 2.6 确认时区和时间
+### 2.6 确认时区和时间
 
 确认集群所有节点机器的时区和时间。要求集群所有节点机器的时区和时间一致。（时间可以相差几秒）
 
@@ -263,7 +263,7 @@ date -s 17:35:15
 
 
 
-#### 2.7 修改标准时间。（此步骤为非必要步骤，试情况操作）
+### 2.7 修改标准时间。（此步骤为非必要步骤，试情况操作）
 
 要么将**所有的机器**都改为UTC标准时间，要么将**所有的机器**都改为CST标准时间，**要统一。**
 
@@ -297,7 +297,7 @@ dpkg-reconfigure tzdata
 
 再执行date查看时间以确认。
 
-### 3.执行安装
+## 3.执行安装
 
 ```
 cd {安装盘目录}
@@ -310,7 +310,7 @@ cd {安装盘目录}
 
 
 
-#### 3.1检查配置是否正确，正确则输入yes继续安装
+### 3.1检查配置是否正确，正确则输入yes继续安装
 
 root@master01:/home/pan_1106# **./install_DL.sh**
 Hardware Architecture: x86_64
@@ -337,7 +337,7 @@ Are these config correct? [ yes / (default)no ]   **yes**
 
 
 
-#### 3.2检查集群信息是否正确，正确则输入yes继续安装
+### 3.2检查集群信息是否正确，正确则输入yes继续安装
 
 ################################
 now begin to deploy node account
@@ -360,7 +360,7 @@ Are these configs correct? [ yes / (default)no ]   **yes**
 
 
 
-#### 3.3输入各机器的ssh root的密码
+### 3.3输入各机器的ssh root的密码
 
 Set up node master02 ...
 Node is: , master02
@@ -457,7 +457,7 @@ deploy node complete
 Congratulation! config file loaded completed.
 Now complete reamain setting
 
-#### 3.4是否将master机器用作worker？
+### 3.4是否将master机器用作worker？
 
 yes则将集群内**所有master**机器作为worker使用，适合用于单点部署。（只有一个机器，既当master又当worker）
 
@@ -472,8 +472,8 @@ READY
 
 press any key to continue installing    **(按任意键继续)**
 
-#### 3.5接受协议
-
+### 3.5接受协议
+```
 press any key to continue installinguseradd: user 'dlwsadmin' already exists
 User already exists...
 ./install_DL.sh: line 169: break: only meaningful in a \`for', \`while', or `until' loop
@@ -510,14 +510,14 @@ All rights reserved under the MIT License:
 
 Do you accept the license terms? [yes|no]
 [no] >>>    **yes**
+```
 
 
-
-#### 3.6选择安装步骤
+### 3.6选择安装步骤
 
 初始安装一般选择第1步即可，如果在安装途中突然退出，则可以选择对应的步骤继续安装部署
 
-
+```
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !
@@ -544,10 +544,10 @@ WARNING:
 15 . init_cluster
 16 . deploy_services
 Choose a step to start from: >>    **1**
+```
 
 
-
-#### 3.7安装盘内的docker镜像推送完毕后，需要确认继续
+### 3.7安装盘内的docker镜像推送完毕后，需要确认继续
 
 All docker images are loaded from install disk ...
 Remove all untagged images ...
@@ -558,7 +558,7 @@ Are you sure you want to continue? [y/N]    **y**
 
 
 
-#### 3.8检查各机器的nfs是否成功挂载
+### 3.8检查各机器的nfs是否成功挂载
 
 ssh -q -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" -i ./deploy/sshkey/id_rsa "dlwsadmin@worker02.sigsus.cn" "sudo rm /mntdlws/jobfiles; sudo rm /mntdlws/storage; sudo rm /mntdlws/work; sudo rm /mntdlws/namenodeshare; sudo rm -r /dlwsdata; sudo mkdir -p /dlwsdata; sudo mkdir -p /mntdlws/jobfiles; sudo chmod ugo+rwx /mntdlws/jobfiles; sudo mkdir -p /mntdlws/storage; sudo chmod ugo+rwx /mntdlws/storage; sudo mkdir -p /mntdlws/work; sudo chmod ugo+rwx /mntdlws/work; sudo mkdir -p /mntdlws/namenodeshare; sudo chmod ugo+rwx /mntdlws/namenodeshare; if [ ! -e /dlwsdata/jobfiles ]; then sudo ln -s /mntdlws/jobfiles /dlwsdata/jobfiles; fi; if [ ! -e /dlwsdata/storage ]; then sudo ln -s /mntdlws/storage /dlwsdata/storage; fi; if [ ! -e /dlwsdata/work ]; then sudo ln -s /mntdlws/work /dlwsdata/work; fi; if [ ! -e /dlwsdata/namenodeshare ]; then sudo ln -s /mntdlws/namenodeshare /dlwsdata/namenodeshare; fi; "
 Please check if all nodes have mounted storage using below cmds:
@@ -585,7 +585,7 @@ source /home/dlwsadmin/DLWorkspace/python2.7-venv/bin/activate
 
 
 
-##### 3.8.1如果所有的节点都有形如下面的输出，则说明挂载成功。
+#### 3.8.1如果所有的节点都有形如下面的输出，则说明挂载成功。
 
 如果挂载成功，则按任意键继续部署。如果挂载不成功，请看步骤3.8.2继续操作。
 
@@ -669,7 +669,7 @@ tmpfs                1.6G     0  1.6G   0% /run/user/1001
 
 
 
-##### 3.8.2如果nfs挂载失败，则需要手动挂载。
+#### 3.8.2如果nfs挂载失败，则需要手动挂载。
 
 不要退出此时的安装脚本程序，新开一个终端执行命令：
 
@@ -693,13 +693,13 @@ source /home/dlwsadmin/DLWorkspace/python2.7-venv/bin/activate
 
 检查挂载成功后，按任意键继续安装部署。
 
-#### 3.9安装结束后，平台所有服务均启动正常，状态为running，且安装不会自行中途退出，则平台部署完成。
+### 3.9安装结束后，平台所有服务均启动正常，状态为running，且安装不会自行中途退出，则平台部署完成。
 
 ```
 kubectl get po -A    # 查看k8s所有pod状态
 ```
 
-#### 3.10目前部署成功后，平台不会自行启动knative服务，需手动启动。
+### 3.10目前部署成功后，平台不会自行启动knative服务，需手动启动。
 
 ```
 cd /home/dlwsadmin/DLWorkspace/YTung/src/ClusterBootstrap
@@ -707,7 +707,7 @@ cd /home/dlwsadmin/DLWorkspace/YTung/src/ClusterBootstrap
 ./deploy.py kubernetes start knative
 ```
 
-### 4.配置gpu资源
+## 4.配置gpu资源
 
 打开平台，在专家系统页面中配置gpu资源
 
@@ -723,7 +723,7 @@ http://172.16.1.30/expert   账号密码： admin、123456
 
 
 
-# FAQ:
+## FAQ:
 
 
 1. 通过域名访问 endpoint
@@ -736,7 +736,7 @@ http://172.16.1.30/expert   账号密码： admin、123456
 
 UBUNTU系统安装盘在RAID ON模式下会认不到NVME固态硬盘，需要改为AHCI模式。
 
-## 1.获取安装盘
+### 1.获取安装盘
 
 安装盘目前都存放在harbor服务器上10.31.3.222:/data/InstallPanBackup。
 
@@ -750,7 +750,7 @@ amd64_Ubuntu_18.04.3_LTS
 
 arm64_Ubuntu_18.04.1_LTS
 
-## 2.如果进行安装部署测试，为了缩短时间，可以将docker-images下关于算法的镜像先剔除掉
+### 2.如果进行安装部署测试，为了缩短时间，可以将docker-images下关于算法的镜像先剔除掉
 
 pytorch:1.5.tar
 
@@ -778,13 +778,13 @@ tensorflow-serving:2.2.0.tar
 
 tensorflow-serving:1.15.0.tar
 
-## 3.harbor部署完成之后，可以在harbor.yaml中查看密码
+### 3.harbor部署完成之后，可以在harbor.yaml中查看密码
 
 ```
 vim /opt/harbor/harbor.yml
 ```
 
-## 4.目前部署成功后，平台不会自行启动knative服务，需手动启动。
+###4.目前部署成功后，平台不会自行启动knative服务，需手动启动。
 
 ```
 cd /home/dlwsadmin/DLWorkspace/YTung/src/ClusterBootstrap
@@ -794,7 +794,7 @@ cd /home/dlwsadmin/DLWorkspace/YTung/src/ClusterBootstrap
 
 
 
-## 5.部署volcano时，pull了错误的镜像
+### 5.部署volcano时，pull了错误的镜像
 
 例： master是x86架构的cpu，却pull了arm的镜像，harbor.sigsus.cn:8443/sz_gongdianju/vc-scheduler:v0.0.1-arm64。
 
@@ -821,7 +821,7 @@ kubectl create -f volcanosh.yaml
 
 
 
-## 6.kfserving与knative启动不正常
+### 6.kfserving与knative启动不正常
 
 检查namespace状态
 
@@ -859,7 +859,7 @@ kubectl replace --raw "/api/v1/namespaces/$NAMESPACE/finalize" -f ./$NAMESPACE.j
 
 
 
-## 7.配置harbor开机自启
+### 7.配置harbor开机自启
 
 ```
 vim /lib/systemd/system/harbor.service
@@ -899,7 +899,7 @@ systemctl enable harbor
 
 
 
-## 8.重启worker机器后发现node状态为NotReady，docker ps也发现没有容器在运行
+### 8.重启worker机器后发现node状态为NotReady，docker ps也发现没有容器在运行
 
 （1）先查看kubelet状态
 
@@ -980,7 +980,7 @@ UUID=E155-C28A  /boot/efi       vfat    umask=0077      0       1
 
 
 
-## 10.没有创建DLWSCluster数据库
+### 10.没有创建DLWSCluster数据库
 
 bug出现的原因：restfulapi容器中有包没有安装好。
 
@@ -1014,7 +1014,7 @@ bash ./run.sh
 
 
 
-## 11.起job的时候一直在调度中，报错configmap "dlws-scripts" not found
+### 11.起job的时候一直在调度中，报错configmap "dlws-scripts" not found
 
 生成configmap
 
@@ -1030,7 +1030,7 @@ kubectl create -f dlws-scripts.yaml
 
 
 
-# 外出部署的一些建议：
+### 外出部署的一些建议：
 
 1、安装盘中复制预置模型数据（model_data），来源于算法组同事，里面包含数据集、预置模型、训练脚本等。
 

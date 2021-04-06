@@ -1,4 +1,4 @@
-# GPU02 
+# GPU02 build horovod container
 
 
 * connect and upload file
