@@ -1,2 +1,2 @@
 # OpenWiKi
-Apulis platform docs for common public 
+Apulis AI　Ｐlatform docs for public.

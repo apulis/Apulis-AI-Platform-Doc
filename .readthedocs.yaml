@@ -14,8 +14,8 @@ python:
 sphinx:
   builder: html
   configuration: docs/zh_CN/conf.py
-  fail_on_warning: true
+  fail_on_warning: false
 # Optionally build your docs in additional formats such as PDF & ePub
-formats: all
+formats: []
 
 # Optionally set the version of Python and requirements required to build your docs
