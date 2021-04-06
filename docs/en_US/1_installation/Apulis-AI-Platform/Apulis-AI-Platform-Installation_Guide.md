@@ -9,7 +9,7 @@ Apulis AI Platform Installation & Deployment Guide
 4. InstallerPackages: The k8s or platform pod container tar packages should be saved and prepared before start
 5. Suggession:        Hope to connect to internet
 
-# 集群规划信息
+# Design cluster network
 
 - 管理节点：集群的master作为ansible的管理节点
 - 集群节点（被管理节点）：
@@ -18,7 +18,7 @@ Apulis AI Platform Installation & Deployment Guide
   - 119.147.212.162 -p 50007（worker02）（atlas02）(arm64）192.168.1.107（内网）
   - 119.147.212.162 -p 50018 （master)（amd64)    192.168.1.113（内网）
 
-# 准备部署环境
+# Pre-installs
 
 ## 配置免密登录
 

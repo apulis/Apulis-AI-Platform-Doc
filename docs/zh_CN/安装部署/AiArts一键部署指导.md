@@ -72,7 +72,7 @@
 
 #### 2.3 编辑节点/etc/hosts
 
-需要为**每个节点**配置短域名解析。
+需要为**部署的mater节点**配置短域名解析。（其他节点不需要，脚本会自动copy）
 
 ```shell
 vim /etc/hosts
@@ -725,6 +725,17 @@ http://172.16.1.30/expert   账号密码： admin、123456
 
 # FAQ:
 
+
+1. 通过域名访问 endpoint
+   在Restfullapi 的配置修改
+   ```bash
+   vim /etc/在Restfullapi/config.yaml
+   # 设置
+   endpoint_use_private_ip:false
+   ```
+
+UBUNTU系统安装盘在RAID ON模式下会认不到NVME固态硬盘，需要改为AHCI模式。
+
 ## 1.获取安装盘
 
 安装盘目前都存放在harbor服务器上10.31.3.222:/data/InstallPanBackup。
@@ -929,6 +940,12 @@ Dec 02 09:48:23 worker01 systemd[1]: kubelet.service: Failed with result 'exit-c
 （2）查看日志后，发现需要关闭swapoff，执行：
 
 ```
+日志：Dec 02 09:48:23 worker01 kubelet[18984]: F1202 09:48:23.403702   18984 server.go:274] failed to run Kubelet: running with swap on is not supported, please disable swap! or set --fail-swap-on flag to false. /proc/swaps contained: [Filename
+```
+
+**swap on is not supported**
+
+```
 swapoff -a    #在每一台worker上执行
 
 或在master上执行：
@@ -960,6 +977,56 @@ UUID=E155-C28A  /boot/efi       vfat    umask=0077      0       1
 
 
 （4）kubectl get nodes即ready
+
+
+
+## 10.没有创建DLWSCluster数据库
+
+bug出现的原因：restfulapi容器中有包没有安装好。
+
+
+
+（1）进入restfulapi容器：
+
+```
+kubectl exec -it restfulapi-\**** bash
+
+top # 查看是否有apache进程
+```
+
+如果有apache相关的进程，则执行： 
+
+```
+pkill apache
+```
+
+安装相关的依赖包（需要有网）
+
+```py
+pip install --ignore-installed mysql-connector-python
+```
+
+运行初始化脚本：
+
+```
+bash ./run.sh
+```
+
+
+
+## 11.起job的时候一直在调度中，报错configmap "dlws-scripts" not found
+
+生成configmap
+
+```
+cd /home/dlwsadmin/DLWorkspace/YTung/src/ClusterBootstrap/services/jobmanager2
+
+./pre-render.sh
+
+kubectl create -f dlws-scripts.yaml
+```
+
+
 
 
 

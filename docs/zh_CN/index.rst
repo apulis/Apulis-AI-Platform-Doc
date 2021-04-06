@@ -20,10 +20,7 @@
    :maxdepth: 2
    :caption: 安装部署
 
-   安装部署/atlas/*
-   安装部署/dlws/*
-   安装部署/apulis-ai-platform/*
-   安装部署/pre-install/*
+   安装部署/*
 
 .. toctree::
    :glob:
@@ -52,13 +49,6 @@
    :caption: 持续集成
 
    持续集成/*
-
-.. toctree::
-   :glob:
-   :maxdepth: 2
-   :caption: 常用工具
-
-   常用工具/*
 
 .. toctree::
    :glob:
