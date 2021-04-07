@@ -22,7 +22,7 @@ copyright = '2021, thomas'
 author = 'thomas'
 
 # The full version, including alpha/beta/rc tags
-release = 'stable'
+release = 'Latest'
 
 
 # -- General configuration ---------------------------------------------------
@@ -41,21 +41,6 @@ extensions = [
     'sphinx_markdown_tables',
     'myst_parser',
 ]
-
-# extensions = [
-#     'recommonmark',
-#     'sphinx.ext.autodoc',
-#     'sphinx.ext.mathjax',
-#     'sphinx.ext.napoleon',
-#     'sphinx.ext.viewcode',
-#     'sphinx.ext.intersphinx',
-#     'sphinx.ext.extlinks',
-#     'sphinx_markdown_tables',
-#     'myst_parser',
-# ]
-
-# 添加示例模块
-# autodoc_mock_imports = ['apex', 'nni_node']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['../_templates']
@@ -77,18 +62,18 @@ source_suffix = ['.rst', '.md']
 
 # -- Options for HTML output -------------------------------------------------
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-#
+# The theme to use for HTML and HTMLapulis_ico.png
+
 html_theme = 'sphinx_rtd_theme'
 
 html_theme_options = {
     'logo_only': True,
+    'navigation_depth': 5,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['../_static']
-html_logo = '../img/diamond.png'
-html_title = '依瞳人工智能平台文库 (%s %s)' % (project, release)
+html_logo = '../img/apulis_ico.png'
+html_title = ' (%s %s)' % (project, release)
