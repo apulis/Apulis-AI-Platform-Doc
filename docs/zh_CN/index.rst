@@ -13,6 +13,7 @@
    :caption: 目录
 
    快速使用指导.md
+   依瞳人工智能平台工业质检用户手册.md
 
 .. toctree::
    :glob:
